@@ -1,14 +1,6 @@
 import 'package:flutter/material.dart';
-
-var activecolor = Colors.black38;
-var deactivecolor = Colors.black54;
-var st1 = TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
-var st2 = TextStyle(fontSize: 13, fontWeight: FontWeight.normal);
-
-enum Gender {
-  male,
-  female,
-}
+import 'package:flutter_application_8/calculator.dart';
+import 'constant.dart';
 
 class Top extends StatelessWidget {
   var icon;
@@ -28,9 +20,9 @@ class Top extends StatelessWidget {
     return GestureDetector(
       onTap: onpress,
       child: Container(
-        margin: EdgeInsets.all(10),
+        margin: const EdgeInsets.all(10),
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.all(Radius.circular(10)),
+          borderRadius: const BorderRadius.all(Radius.circular(10)),
           color: col,
         ),
         child: Column(
@@ -40,7 +32,7 @@ class Top extends StatelessWidget {
               icon,
               size: 100,
             ),
-            SizedBox(
+            const SizedBox(
               height: 20,
             ),
             Container(
@@ -50,6 +42,41 @@ class Top extends StatelessWidget {
               ),
             )
           ],
+        ),
+      ),
+    );
+  }
+}
+
+class Calculate extends StatelessWidget {
+  Calculate({required this.text, required this.fun});
+  var text;
+  var fun;
+  @override
+  Widget build(BuildContext context) {
+    return TextButton(
+      onPressed: () {
+        no = Calculator(height: height, weight: weight);
+        no.getbmi();
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) {
+              return fun;
+            },
+          ),
+        );
+      },
+      child: Container(
+        height: 80,
+        width: double.infinity,
+        color: Colors.purple,
+        child: Center(
+          child: Text(
+            text,
+            style: const TextStyle(
+                fontSize: 25, fontWeight: FontWeight.bold, color: Colors.white),
+          ),
         ),
       ),
     );

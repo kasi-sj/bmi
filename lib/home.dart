@@ -1,17 +1,8 @@
 import 'package:flutter/material.dart';
 import 'widget.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-
-var activecolor = Colors.black38;
-var deactivecolor = Colors.black54;
-var height = 160;
-var weight = 50;
-var age = 12;
-
-enum Gender {
-  male,
-  female,
-}
+import 'constant.dart';
+import 'secondpage.dart';
 
 var selectedstate;
 
@@ -59,185 +50,183 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Center(child: Text('BMI')),
+          title: Center(child: Text('BMI', style: st4)),
           toolbarHeight: 50,
         ),
-        body: Container(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              Expanded(
-                child: Container(
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Expanded(
-                        child: Top(
-                          icon: Icons.male,
-                          st: 'MALE',
-                          col: selectedstate == Gender.male
-                              ? activecolor
-                              : deactivecolor,
-                          onpress: male,
-                        ),
-                      ),
-                      Expanded(
-                        child: Top(
-                          icon: Icons.female,
-                          st: 'FEMALE',
-                          col: selectedstate == Gender.female
-                              ? activecolor
-                              : deactivecolor,
-                          onpress: female,
-                        ),
-                      ),
-                    ],
+        body: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            Expanded(
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Expanded(
+                    child: Top(
+                      icon: Icons.male,
+                      st: 'MALE',
+                      col: selectedstate == Gender.male
+                          ? activecolor
+                          : deactivecolor,
+                      onpress: male,
+                    ),
                   ),
-                ),
+                  Expanded(
+                    child: Top(
+                      icon: Icons.female,
+                      st: 'FEMALE',
+                      col: selectedstate == Gender.female
+                          ? activecolor
+                          : deactivecolor,
+                      onpress: female,
+                    ),
+                  ),
+                ],
               ),
-              Expanded(
-                  child: Container(
-                margin: EdgeInsets.all(10),
-                decoration: BoxDecoration(
-                    color: activecolor,
-                    borderRadius: BorderRadius.all(Radius.circular(10))),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Text(
+            ),
+            Expanded(
+                child: Container(
+              margin: const EdgeInsets.all(10),
+              decoration: BoxDecoration(
+                  color: activecolor,
+                  borderRadius: const BorderRadius.all(Radius.circular(10))),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text(
                       'HEIGHT',
                       style: st2,
                     ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          height.toString(),
-                          style: st1,
-                        ),
-                        Text(
-                          'cm',
-                          style: TextStyle(fontSize: 8),
-                        ),
-                      ],
-                    ),
-                    SliderTheme(
-                      data: SliderThemeData(
-                          overlayShape:
-                              RoundSliderOverlayShape(overlayRadius: 50),
-                          activeTrackColor: Colors.purple,
-                          inactiveTrackColor: Colors.grey,
-                          thumbShape:
-                              RoundSliderThumbShape(enabledThumbRadius: 15)),
-                      child: Slider(
-                          min: 120,
-                          max: 220,
-                          activeColor: Colors.purple,
-                          inactiveColor: Colors.grey,
-                          value: height.toDouble(),
-                          onChanged: (value) {
-                            setState(() {
-                              height = value.round();
-                            });
-                          }),
-                    )
-                  ],
-                ),
-              )),
-              Expanded(
-                child: Container(
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Expanded(
-                        child: Container(
-                          margin: EdgeInsets.all(10),
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.all(Radius.circular(10)),
-                            color: Colors.black38,
-                          ),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: [
-                              Text('WEIGHT', style: st2),
-                              SizedBox(),
-                              Text(
-                                weight.toString(),
-                                style: st1,
-                              ),
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceEvenly,
-                                children: [
-                                  FloatingActionButton(
-                                      onPressed: () {
-                                        increse(1);
-                                      },
-                                      child: Icon(FontAwesomeIcons.add)),
-                                  FloatingActionButton(
-                                    onPressed: () {
-                                      decrese(1);
-                                    },
-                                    child: Icon(FontAwesomeIcons.minus),
-                                  )
-                                ],
-                              ),
-                            ],
-                          ),
-                        ),
+                      Text(
+                        height.toString(),
+                        style: st1,
                       ),
-                      Expanded(
-                        child: Container(
-                          margin: EdgeInsets.all(10),
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.all(Radius.circular(10)),
-                            color: Colors.black38,
-                          ),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: [
-                              Text('AGE', style: st2),
-                              SizedBox(),
-                              Text(
-                                age.toString(),
-                                style: st1,
-                              ),
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceEvenly,
-                                children: [
-                                  FloatingActionButton(
-                                      onPressed: () {
-                                        increse(2);
-                                      },
-                                      child: Icon(FontAwesomeIcons.add)),
-                                  FloatingActionButton(
-                                    onPressed: () {
-                                      decrese(2);
-                                    },
-                                    child: Icon(FontAwesomeIcons.minus),
-                                  )
-                                ],
-                              ),
-                            ],
-                          ),
-                        ),
+                      const Text(
+                        'cm',
+                        style: TextStyle(fontSize: 8),
                       ),
                     ],
                   ),
-                ),
+                  SliderTheme(
+                    data: const SliderThemeData(
+                        trackHeight: 2,
+                        thumbColor: Colors.purple,
+                        overlayShape:
+                            RoundSliderOverlayShape(overlayRadius: 30),
+                        activeTrackColor: Colors.white,
+                        inactiveTrackColor: Colors.grey,
+                        thumbShape:
+                            RoundSliderThumbShape(enabledThumbRadius: 15)),
+                    child: Slider(
+                        min: 120,
+                        max: 220,
+                        value: height.toDouble(),
+                        onChanged: (value) {
+                          setState(() {
+                            height = value.round();
+                          });
+                        }),
+                  )
+                ],
               ),
-              Container(
-                height: 80,
-                width: double.infinity,
-                color: Colors.purple,
-              )
-            ],
-          ),
+            )),
+            Expanded(
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Expanded(
+                    child: Container(
+                      margin: const EdgeInsets.all(10),
+                      decoration: const BoxDecoration(
+                        borderRadius: BorderRadius.all(Radius.circular(10)),
+                        color: Colors.black38,
+                      ),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          Text('WEIGHT', style: st2),
+                          const SizedBox(),
+                          Text(
+                            weight.toString(),
+                            style: st1,
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              FloatingActionButton(
+                                  backgroundColor: Colors.black38,
+                                  onPressed: () {
+                                    increse(1);
+                                  },
+                                  child: const Icon(FontAwesomeIcons.plus)),
+                              FloatingActionButton(
+                                backgroundColor: Colors.black38,
+                                onPressed: () {
+                                  decrese(1);
+                                },
+                                child: const Icon(FontAwesomeIcons.minus),
+                              )
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  Expanded(
+                    child: Container(
+                      margin: const EdgeInsets.all(10),
+                      decoration: const BoxDecoration(
+                        borderRadius: BorderRadius.all(Radius.circular(10)),
+                        color: Colors.black38,
+                      ),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          Text('AGE', style: st2),
+                          const SizedBox(),
+                          Text(
+                            age.toString(),
+                            style: st1,
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              FloatingActionButton(
+                                  backgroundColor: Colors.black38,
+                                  onPressed: () {
+                                    increse(2);
+                                  },
+                                  child: const Icon(FontAwesomeIcons.plus)),
+                              FloatingActionButton(
+                                backgroundColor: Colors.black38,
+                                onPressed: () {
+                                  decrese(2);
+                                },
+                                child: const Icon(FontAwesomeIcons.minus),
+                              )
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            Calculate(
+              text: 'CALCULATE',
+              fun: const Secondpage(),
+            )
+          ],
         ));
   }
 }
